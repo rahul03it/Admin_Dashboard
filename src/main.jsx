@@ -20,7 +20,7 @@ import Setting from './components/Setting.jsx';
 
 const routes=createBrowserRouter([
   {
-    path:"login",
+    path:"/",
     element:<Dashboard/>,
     children:[
       {

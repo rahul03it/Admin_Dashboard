@@ -9,7 +9,7 @@ import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 const Dashboard = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [theme, setTheme] = useState('dark');
-  const [notifications, setNotifications] = useState(3);
+  const [notifications, _] = useState(3);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -29,29 +29,30 @@ const Dashboard = () => {
     localStorage.setItem('sidebarCollapsed', isCollapsed.toString());
   }, [isCollapsed]);
 
-  useEffect(() => {
-    if (!localStorage.getItem('token')) navigate('/login');
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (!localStorage.getItem('token')) navigate('/login');
+  // }, [navigate]);
 
   const toggleCollapse = () => setIsCollapsed(!isCollapsed);
   const toggleTheme = () => setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to log out?')) {
       localStorage.removeItem('token');
       localStorage.removeItem('role');
-      navigate('/login');
+      navigate('');
     }
   };
 
   const menuItems = [
-    { to: '/login/dashboard', icon: FaHome, label: 'Dashboard' },
-    { to: '/login/analytics', icon: FaChartBar, label: 'Analytics' },
-    { to: '/login/users', icon: FaUsers, label: 'Users' },
-    { to: '/login/calendar', icon: FaRegCalendarAlt, label: 'Calendar' },
-    { to: '/login/database', icon: FaDatabase, label: 'Database' },
-    { to: '/login/popup', icon: FaWindowRestore, label: 'Popup' },
-    { to: '/login/reports', icon: FaClipboardList, label: 'Reports' },
-    { to: '/login/settings', icon: FaCog, label: 'Settings' }
+    { to: '/dashboard', icon: FaHome, label: 'Dashboard' },
+    { to: '/analytics', icon: FaChartBar, label: 'Analytics' },
+    { to: '/users', icon: FaUsers, label: 'Users' },
+    { to: '/calendar', icon: FaRegCalendarAlt, label: 'Calendar' },
+    { to: '/database', icon: FaDatabase, label: 'Database' },
+    { to: '/popup', icon: FaWindowRestore, label: 'Popup' },
+    { to: '/reports', icon: FaClipboardList, label: 'Reports' },
+    { to: '/settings', icon: FaCog, label: 'Settings' }
   ];
 
   const styles = {
